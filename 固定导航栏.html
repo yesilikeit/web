@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;padding:0
+        }
+        img {
+            vertical-align: top;
+        }
+        .main {
+            margin:0 auto;
+            width:1000px;
+            margin-top:10px;
+
+        }
+        #Q-nav {
+            overflow: hidden;
+        }
+        .fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+    window.onload = function(){
+        //滚动界面的时候,被卷去的头部超过第二个盒子距离顶部的位置,那么直接给定第二个盒子加.fixed类名
+        var topDiv = document.getElementById("top");
+        var middle = document.getElementById("Q-nav");
+        var main = document.getElementById("main");
+        var topDivH = topDiv.offsetHeight;
+        
+        window.onscroll = function(){
+            if(scroll().top >topDivH){
+                middle.className += " fixed";
+                //第二个盒子不占位置了,所以给第三个盒子一个上padding占位置
+                main.style.paddingTop = middle.offsetHeight+"px";
+            }else{
+                middle.className = "";
+                main.style.padding = 0;
+            }
+        }
+    }
+    
+    
+    
+    function scroll(){
+            if(window.pageYOffset !== undefined){
+                // var json = {
+                //     "top":window.pageYOffset,
+                //     "left":window.pageXOffset
+                // }
+                return {
+                    "top":window.pageYOffset,
+                    "left":window.pageXOffset
+                }
+            }else if(document.compatMode === "CSS1CompatMode"){
+                return {
+                    "top":document.documentElement.scrollTop,
+                    "left":document.documentElement.scrollLeft
+                }
+            }else{
+                return {
+                    "top":document.body.scrollTop,
+                    "left":document.body.scrollLeft
+                }
+            }
+            //简单封装(实际工作用)
+            // return {
+            //     "top":window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+            //     "left":window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
+            // }
+        }
+    </script>
+    <div class="top" id="top">
+        <img src="images/top.png" alt=""/>
+    </div>
+    <div id="Q-nav">
+        <img src="images/nav.png" alt=""/>
+    </div>
+    <div class="main" id="main">
+        <img src="images/main.png" alt=""/>
+    </div>
+
+</body>
+</html>
