@@ -226,7 +226,7 @@
             step = step>0?Math.ceil(step):Math.floor(step);
             ele.style.left = ele.offsetLeft + step + "px";
             //跳出条件
-            if(Math.abs(target-ele.offsetLeft)<Math.abs(step)){
+            if(Math.abs(target-ele.offsetLeft)<=Math.abs(step)){
                 ele.style.left = target + "px";
                 clearInterval(ele.timer);
             }
