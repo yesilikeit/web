@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background: rgba(0, 0,0, 0.8);
+    }
+    .box {
+        position: relative;
+        width: 800px;
+        height: 42px;
+        border-radius: 8px;
+        margin: 200px auto;
+        background: #fff url("images/wifi.png") right center no-repeat;
+    }
+    ul {
+        list-style: none;
+        position: relative;
+
+    }
+    li {
+        float: left;
+        width: 83px;
+        height: 42px;
+        text-align: center;
+    }
+    li a {
+        text-decoration: none;
+        font: 500 18px/42px "simsun";
+        color: #000;
+    }
+    span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 83px;
+        height: 42px;
+        background:url("images/cloud.gif") no-repeat;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span></span>
+        <ul>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+            <li><a href="javascript:;">首页新闻</a></li>
+        </ul>
+    </div>
+    <script>
+    //获取元素
+    var span = document.getElementsByTagName("span")[0];
+    var liArr = document.getElementsByTagName("li");
+    var liWidth = liArr[0].offsetWidth;
+    var aArr = document.getElementsByTagName("a");
+    var count = 0;
+
+    //绑定事件
+    for(var i=0;i<liArr.length;i++){
+        //绑定索引值
+        aArr[i].index = i;
+    //鼠标放置
+        aArr[i].onmouseover = function(){
+            //让span运动到li的索引值位置
+            slow(span,this.index*liWidth);
+        }
+    //鼠标移开
+        aArr[i].onmouseout = function(){
+            slow(span,count*liWidth);
+        }
+        //点击事件,记录功能
+        aArr[i].onclick = function(){
+            //需要一个计数器,全局变量
+            count = this.index;
+            slow(span,count*liWidth);
+        }
+    }
+
+
+        //缓动动画封装
+        function slow(ele,target){
+            //使用定时器,先清除定时器
+            clearInterval(ele.timer);
+            //绑定timer属性为定时器
+            ele.timer = setInterval(function(){
+                //每次走的步长为Math.ceil(目标值-当前值)/10
+                var step = (target-ele.offsetLeft)/10;
+                //判断当前位置与目标位置
+                step = step>0?Math.ceil(step):Math.floor(step);
+                ele.style.left = ele.offsetLeft + step + "px";
+                //跳出条件
+                if(Math.abs(target-ele.offsetLeft)<Math.abs(step)){
+                    ele.style.left = target + "px";
+                    clearInterval(ele.timer);
+                }
+            },30); 
+        }
+    </script>
+</body>
+</html>

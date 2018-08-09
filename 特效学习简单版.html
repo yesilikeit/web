@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: relative;
+    }
+    </style>
+</head>
+<body>
+    <button id="btn1">200</button>
+    <button id="btn2">400</button>
+    <div class="box">
+
+    </div>
+
+<script>
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var box = document.getElementsByClassName("box")[0];
+
+    var timer = null;
+    btn1.onclick = function(){
+        animate(box,200);
+    }
+
+    btn2.onclick = function(){
+        animate(box,400);
+    }
+    function animate(ele,target){
+        // 先清除定时器
+        clearInterval(ele.timer);
+        var speed = target>ele.offsetLeft? 10 : -10;
+        ele.timer=setInterval(function(){
+            var val = ele.offsetLeft-target;
+            ele.style.left = ele.offsetLeft + speed +"px";
+            if(Math.abs(val)<=Math.abs(speed)){
+                ele.style.left = target+"px";
+                clearInterval(ele.timer);
+            }
+        },30)
+    }
+</script>
+</body>
+</html>

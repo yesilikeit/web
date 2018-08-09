@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div {
+        margin: 0;
+        padding: 0;
+    }
+    .box {
+        width: 500px;
+        height: 200px;
+        background-color: pink;
+        position: relative;
+        overflow: hidden;
+    }
+    .box1 {
+        position: absolute;
+        width: 5000px;
+        height: 200px;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    ul li {
+        list-style: none;
+        float: left;
+    }
+
+    
+    </style>
+</head>
+<body>
+    <button>动画</button>
+    <div class="box">
+         <div class="box1">
+             <ul>
+                 <li><img src="images/1.jpg" alt=""></li>
+                 <li><img src="images/2.jpg" alt=""></li>
+                 <li><img src="images/3.jpg" alt=""></li>
+                 <li><img src="images/4.jpg" alt=""></li>
+                 <li><img src="images/5.jpg" alt=""></li>
+             </ul>
+         </div>
+    </div>
+   
+    <script>
+    var btn = document.getElementsByTagName("button")[0];
+    var box = document.getElementsByClassName("box")[0];
+    var box1 = document.getElementsByClassName("box1");
+    var timer = null;
+    var step = -500;
+        btn.onclick = function (){
+            if(step>-2500){
+            animate(step);  
+            step -= 500;
+            }else{
+                step=-500;
+                box1[0].style.left ="0px";
+            }
+        }
+        function animate(target){
+            clearInterval(timer);
+            timer=setInterval(function(){
+                if(target>-2500){
+                box1[0].style.left =box1[0].offsetLeft -5 + "px";
+                    if(target===box1[0].offsetLeft){
+                        clearInterval(timer);
+                    }
+                }
+            },1);
+        }
+    
+
+    
+    
+    </script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

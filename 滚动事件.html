@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body {
+        height: 5000px;
+    }
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        border: 1px solid red;
+        margin: 2px;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+    <div class="box">
+        我喜欢写代码,真心喜欢不骗你.
+        我喜欢写代码,真心喜欢不骗你.
+        我喜欢写代码,真心喜欢不骗你.
+        我喜欢写代码,真心喜欢不骗你.
+    </div>
+
+    <script>
+    //鼠标滚轮触发
+    window.onscroll = function(){
+        //页面指定了DTD，即指定了DOCTYPE时，使用document.documentElement。
+        document.title = document.documentElement.scrollTop;
+        //页面没有DTD，即没指定DOCTYPE时，使用document.body。
+        // document.title = document.body.scrollTop;
+        //兼容写法1:
+        document.title = document.documentElement.scrollTop || document.body.scrollTop;
+        //兼容写法2:
+        document.title = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    }
+    //scrollWidth
+    var div = document.getElementsByTagName("div")[0];
+    console.log(div.scrollWidth);
+    console.log(div.scrollHeight);
+    console.log(document.body.scrollTop);
+    
+    
+    </script>
+</body>
+</html>

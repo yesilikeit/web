@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div {
+        margin: 0 5px;
+        padding: 0;
+        background-color:pink;
+        width: 100px;
+        height: 100px;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <div></div>
+    <div id="box"></div>
+    <div class="box"></div>
+
+    <script>
+        
+        function getEle(str){
+            var strname=str.slice(1);
+            var node;
+                switch (str.charAt(0)) {
+                    case "#":node=document.getElementById(strname);
+                    break;
+                    case ".":node =document.getElementsByClassName(strname);
+                    break;
+                    default:node=document.getElementsByTagName(str);
+                }
+                return node;
+        }
+        getEle("#box").style.backgroundColor="red";
+
+        for(var i=0;i<getEle("div").length;i++){
+
+            getEle("div")[i].style.border="2px solid #000"; 
+        }
+       
+    
+    </script>
+</body>
+</html>

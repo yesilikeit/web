@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: absolute;
+        left: 400px;
+    }
+</style>
+    
+<body>
+    <button>200</button>
+    <button>600</button>
+    <div></div>
+
+    <script>
+    var btn = document.getElementsByTagName("button");
+    var div = document.getElementsByTagName("div")[0];
+    btn[0].onclick = function (){
+       slow(div,200);
+    }
+    btn[1].onclick = function (){
+       slow(div,600);
+    }
+    //缓动动画封装
+    function slow(ele,target){
+        //使用定时器,先清除定时器
+        clearInterval(ele.timer);
+        //绑定timer属性为定时器
+        ele.timer = setInterval(function(){
+            //每次走的步长为Math.ceil(目标值-当前值)/10
+            var step = (target-ele.offsetLeft)/10;
+            //判断当前位置与目标位置
+            step = step>0?Math.ceil(step):Math.floor(step);
+            ele.style.left = ele.offsetLeft + step + "px";
+            //跳出条件
+            if(Math.abs(target-ele.offsetLeft)<Math.abs(step)){
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        },30); 
+    }
+    
+    
+    </script>
+</body>
+</html>
