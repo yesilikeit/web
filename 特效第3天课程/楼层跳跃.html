@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body,html {
+            height: 100%;
+        }
+        ul {
+            list-style: none;
+            height: 100%;
+            
+        }
+        ul li {
+            height: 100%;
+        }
+        ol {
+            list-style: none;
+            position: fixed;
+            top: 80px;
+            left: 50px;
+
+        }
+        ol li {
+            height: 50px;
+            width: 50px;
+            border: 1px solid #000000;
+            text-align: center;
+            line-height: 50px;
+            margin-top:-1px;
+            cursor: pointer;         
+        }
+
+    
+    
+    </style>
+</head>
+<body>
+    <ul>
+        <li>车子</li>
+        <li>房子</li>
+        <li>银子</li>
+        <li>妻子</li>
+        <li>孩子</li>
+    </ul>
+    <ol>
+        <li>宝马</li>
+        <li>别墅</li>
+        <li>黄金</li>
+        <li>美女</li>
+        <li>龙凤</li>
+    </ol>
+
+
+    <script>
+    //需求:点击ol的li屏幕滑动到ul的li的范围
+    //思路:还是使用window.scrollTo();
+    //获取元素
+    var ul = document.getElementsByTagName("ul")[0];
+    var ol = document.getElementsByTagName("ol")[0];
+    var ulLiArr = ul.children;
+    var olLiArr = ol.children;
+    //目标值,当前值,timer
+    var target = 0;
+    var leader = 0;
+    var timer = null;
+    //颜色给定用数组方式
+    var arrColor = ["pink","blue","yellow","orange","green"];
+    //循环绑定
+    for (var i = 0;i<arrColor.length;i++){
+        ulLiArr[i].style.backgroundColor = arrColor[i];
+        olLiArr[i].style.backgroundColor = arrColor[i];
+        //索引值绑定
+        olLiArr[i].index = i;
+        //点击绑定缓动事件
+        olLiArr[i].onclick = function(){
+            //目标值
+            target=ulLiArr[this.index].offsetTop;
+            clearInterval(timer);
+            timer=setInterval(function(){
+                //步长
+                var step = (target-leader)/10;
+                step = step>0?Math.ceil(step):Math.floor(step);
+                //需要到达的地方
+                leader = leader + step;
+                window.scrollTo(0,leader);
+                //清除定时器
+                if(Math.abs(leader-target) <= Math.abs(step)){
+                    window.scrollTo(0,target);
+                    clearInterval(timer);
+                }
+            },30);    
+        }
+    }
+    //获取当前值
+    window.onscroll = function(){
+        leader = scroll().top;
+    }
+//scroll兼容封装
+function scroll(){
+    if(window.pageYOffset !== undefined){
+        // var json = {
+        //     "top":window.pageYOffset,
+        //     "left":window.pageXOffset
+        // }
+        return {
+            "top":window.pageYOffset,
+            "left":window.pageXOffset
+        }
+    }else if(document.compatMode === "CSS1CompatMode"){
+        return {
+            "top":document.documentElement.scrollTop,
+            "left":document.documentElement.scrollLeft
+        }
+    }else{
+        return {
+            "top":document.body.scrollTop,
+            "left":document.body.scrollLeft
+        }
+    }
+    //简单封装(实际工作用)
+    // return {
+    //     "top":window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+    //     "left":window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
+    // }
+}
+    </script>
+</body>
+</html>

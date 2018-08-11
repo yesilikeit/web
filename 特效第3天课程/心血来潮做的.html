@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .box {
+        background-color: #eeeeee;
+        position: relative;
+    }
+    .imgBox {
+        width: 463px;
+        height: 517px;
+        border: 1px solid pink;
+        margin-left: 30%;
+    }
+    #marryMe {
+        margin-left: 40%;
+    }
+    #no {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+    }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <div class="imgBox">
+            <img src="../images/MarryMe.jpg" alt="">
+        </div>
+        <button id="marryMe">我爱你!我要嫁给你!</button>
+        <button id="no">才不要~</button>
+    </div>
+    
+    <script>
+    var no = document.getElementById("no");
+    var marryMe = document.getElementById("marryMe");
+    no.onmouseover = function(){
+        no.style.top = parseInt(Math.random()*520)+"px";
+        no.style.left = parseInt(Math.random()*1320)+"px";
+    }
+    marryMe.onclick = function(){
+        alert("领证去!么么哒");
+    }
+    
+    </script>
+</body>
+</html>

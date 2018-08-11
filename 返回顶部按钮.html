@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    img {
+        position: fixed;
+        bottom: 150px;
+        right: 150px;
+        cursor: pointer;
+    }
+    .hidden {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        //向下滚动超过100,显示小火箭,点击小火箭缓慢回到顶端;
+        //计时器timer
+    var timer = null;
+    //目标位置
+    var target = 0;
+    //当前位置
+    var leader = 0;
+    window.onload = function (){
+        var img = document.getElementsByTagName("img")[0];
+        //显示隐藏小火箭
+        window.onscroll = function(){
+            if(scroll().top>200){
+                img.className = "";
+            }else{
+                img.className = "hidden";
+            }
+            leader = scroll().top;
+        }
+        //点击小火箭缓慢回到顶部
+        img.onclick = function (){
+            slowly();
+        }
+
+
+
+    }
+    //页面缓动动画
+function slowly(){
+    clearInterval(timer);
+    timer = setInterval(function(){
+        //步长=(目标位置-当前位置)/10
+        var step = (target-leader)/10;
+        step = step>0?Math.ceil(step):Math.floor(step);
+        //当前位置每次变化的值
+        leader = leader + step;
+        window.scrollTo(0,leader);
+        //到达顶端后清除计时器
+        if(leader === 0){
+            clearInterval(timer);
+        }
+    },30);
+}
+
+    //垂直缓动动画封装
+function slowTop(ele,target){
+    //使用定时器,先清除定时器
+    clearInterval(ele.timer);
+    //绑定timer属性为定时器
+    ele.timer = setInterval(function(){
+        //每次走的步长为Math.ceil(目标值-当前值)/10
+        var step = (target-ele.offsetTop)/10;
+        //判断当前位置与目标位置
+        step = step>0?Math.ceil(step):Math.floor(step);
+        ele.style.top = ele.offsetTop + step + "px";
+        //跳出条件
+        if(Math.abs(target-ele.offsetTop)<=Math.abs(step)){
+            ele.style.top = target + "px";
+            clearInterval(ele.timer);
+        }
+    },30); 
+}
+//scroll兼容封装
+function scroll(){
+    if(window.pageYOffset !== undefined){
+        // var json = {
+        //     "top":window.pageYOffset,
+        //     "left":window.pageXOffset
+        // }
+        return {
+            "top":window.pageYOffset,
+            "left":window.pageXOffset
+        }
+    }else if(document.compatMode === "CSS1CompatMode"){
+        return {
+            "top":document.documentElement.scrollTop,
+            "left":document.documentElement.scrollLeft
+        }
+    }else{
+        return {
+            "top":document.body.scrollTop,
+            "left":document.body.scrollLeft
+        }
+    }
+    //简单封装(实际工作用)
+    // return {
+    //     "top":window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+    //     "left":window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
+    // }
+}
+    </script>
+    <img src="images/Top.jpg" alt="" class="hidden">
+    <div>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+       This is a demo <br>
+    </div>
+
+</body>
+</html>
